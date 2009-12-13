@@ -1,0 +1,30 @@
+{% load i18n %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+
+<html>
+
+<h1>{% trans "List of recording" %}</h1>
+
+<ul>
+  {%for recording in recordings %}
+  {% if recording.finish %}
+        <li><p><ul>
+            <li><b>{{recording.name}}</b>
+            <i><a href="{{OSR_URL}}{{recording.id}}.{{recording.source.type}}">{% trans "Listen" %}</a></i></li>
+            <li><b>{% trans "Start time" %}:</b> {{recording.start|date:"D d M Y"}} {% trans "at" %} {{recording.start|date:"H:i"}}</li>
+            <li><b>{% trans "Duration" %}:</b> {{ recording.duration }} minutes</li>
+            <li><b>{% trans "Source" %}:</b> {{ recording.source.name }}</li>
+            </ul></p></li>
+  {% else %}
+
+    {% if recording.onair %}
+      <li><b>{% trans "On air" %}:</b> {{recording.name}}</li>
+    {% else %}
+      <li><b>{{recording.name}}:</b> {% trans "In" %} {{ recording.start|timeuntil }}</li>
+    {% endif %}
+  {% endif %}
+  {% endfor %}
+</ul>
+</html>

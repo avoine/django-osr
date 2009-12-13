@@ -1,0 +1,13 @@
+*.pyc
+.*.swp
+*.egg-info
+*.svn
+*.bzr
+*.hg
+*.bak
+prod_settings.py
+example.db
+build
+dist
+secret.txt
+/example/media/audio/*
