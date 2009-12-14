@@ -7,6 +7,7 @@
 *.bak
 prod_settings.py
 example.db
+example.db-journal
 build
 dist
 secret.txt

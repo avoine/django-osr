@@ -34,7 +34,9 @@ class ATestInterfaceTestCase(unittest.TestCase):
         c = Client()
         response = c.get('/')
         self.assertEquals(str(response),\
-"""Content-Type: text/html; charset=utf-8
+"""Vary: Accept-Language, Cookie
+Content-Type: text/html; charset=utf-8
+Content-Language: en
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
@@ -44,13 +46,11 @@ class ATestInterfaceTestCase(unittest.TestCase):
 </head>
 <body>
 
-
 <h1>List of recording</h1>
 
 
 
 There is no recorded stream available.
-
 
 
 
@@ -64,7 +64,8 @@ There is no recorded stream available.
         self.assertEquals(response.status_code, 404)
 
 class SourceTestCase(unittest.TestCase):
-    def setUp(self):
+
+    def testAACreateObjects(self):
         self.radiocan = Source.objects.create(
             name=u"Radio-Canada: La première chaîne",
             slug=u"radio-canada-la-premiere-chaine",
@@ -76,6 +77,16 @@ class SourceTestCase(unittest.TestCase):
                     name="sample", slug="sample", 
                     start=datetime.now() + timedelta(minutes=2),
                     duration=1, source_id=1)
+
+    def testGetById(self):
+        c = Client()
+        response = c.get('/1/')
+        self.assertEquals(response.status_code, 200)
+
+    def testGetBySlug(self):
+        c = Client()
+        response = c.get('/sample/')
+        self.assertEquals(response.status_code, 200)
 
     def testRecording(self):
         comm = osr_check.Command()
@@ -90,8 +101,7 @@ class SourceTestCase(unittest.TestCase):
         self.assertEquals(rec2.finish, True)
 
         self.assertTrue('1.mp3' in os.listdir('media/audio/'))
-
-    def tearDown(self):
         os.unlink('media/audio/1.mp3')
         os.unlink('media/audio/1.cue')
         self.assertEquals(os.listdir('media/audio/'), [])
+

@@ -35,9 +35,17 @@ def recording_list(request):
 
 def recording_detail(request, slug_or_id):
     try:
-        rec = Recording.objects.get(Q(slug=slug_or_id) | Q(id=slug_or_id))
+        slug_or_id = int(slug_or_id)
+        rec = Recording.objects.get(id=slug_or_id)
+    except ValueError:
+        try:
+            rec = Recording.objects.get(slug=slug_or_id)
+        except Recording.DoesNotExist:
+            raise Http404
     except Recording.DoesNotExist:
         raise Http404
+
+
 
     return render_to_response('osr/recording_detail.html',\
                               {'recording': rec, 'OSR_URL': settings.OSR_URL})
