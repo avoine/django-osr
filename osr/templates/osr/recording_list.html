@@ -1,11 +1,17 @@
+{% extends "base.html" %}
+
 {% load i18n %}
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+{% block title %}List of recording{% endblock %}
 
-<html>
-
+{% block content %}
 <h1>{% trans "List of recording" %}</h1>
+
+{% if not recordings %}
+
+There is no recorded stream available.
+
+{% else %}
 
 <ul>
   {%for recording in recordings %}
@@ -27,4 +33,6 @@
   {% endif %}
   {% endfor %}
 </ul>
-</html>
+
+{% endif %}
+{% endblock %}

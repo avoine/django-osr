@@ -1,9 +1,10 @@
+{% extends "base.html" %}
+
 {% load i18n %}
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+{% block title %}{% trans "Recording" %}: {{recording.name}}{% endblock %}
 
-<html>
+{% block content %}
 <h1>{{recording.name}}</h1>
   {% if recording.finish %}
      <p><i><a href="{{OSR_URL}}{{recording.id}}.{{recording.source.type}}">{% trans "Listen" %}</a></i></p>
@@ -19,4 +20,4 @@
       <b>{{recording.name}}:</b> {% trans "In" %} {{ recording.start|timeuntil }}
     {% endif %}
   {% endif %}
-</html>
+{% endblock %}

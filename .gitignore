@@ -10,4 +10,5 @@ example.db
 build
 dist
 secret.txt
+html
 /example/media/audio/*
