@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-12-13 20:12-0500\n"
+"POT-Creation-Date: 2009-12-13 21:49-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -108,3 +108,7 @@ msgstr "Dans"
 #: templates/osr/recording_list.html:8
 msgid "List of recording"
 msgstr "Liste des enregistrements"
+
+#: templates/osr/recording_list.html:12
+msgid "There is no recorded stream available."
+msgstr "Il n'y a pas d'enregistrement de flux de disponible."
